@@ -1,0 +1,72 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Backendless
+providerId: backendless
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- BaaS
+- Backend as a Service
+- Database
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Backendless does not throttle API call volume - all Cloud plans advertise
+  unlimited API calls per month. Instead, capacity is governed by per-plan
+  resource caps (file storage, number of data tables, and concurrent real-time
+  connections) and, on the Scale plan, by daily billing tiers keyed to peak API
+  requests per minute. Standard request constraints apply, such as a maximum
+  page size of 100 objects on data retrieval. Specific account-level concurrency
+  and per-endpoint values are not reconciled in this artifact.
+notes: >-
+  Confirm current real-time connection caps, data-table caps, and the Scale plan
+  peak requests-per-minute tier table on the Backendless Cloud pricing page
+  during reconciliation. Data find operations are capped at a page size of 100.
+sources:
+- https://backendless.com/pricing/backendless-cloud/
+- https://backendless.com/feature-49-un-throttled-api-calls-for-all-pricing-plans/
+- https://backendless.com/docs/rest/data_basic_search.html
+responseCodes:
+  throttled: 429
+limits:
+- name: API Calls Per Month
+  scope: account
+  metric: requests
+  limit: unlimited (un-throttled on all Cloud plans)
+  notes: API call volume is not throttled; Scale plan bills via daily peak-RPM tiers.
+- name: Real-Time Connections
+  scope: account
+  metric: connections
+  limit: 5 (Free) / 1000 (Scale); expandable via function packs
+  notes: Concurrent Socket.IO real-time connections; raise with the real-time function pack.
+- name: Data Tables
+  scope: account
+  metric: tables
+  limit: 20 (Free) / 100 (Scale)
+  notes: Maximum number of database tables per application.
+- name: File Storage
+  scope: account
+  metric: gigabytes
+  limit: 1 GB (Free) / 10 GB (Scale); expandable via function packs
+  notes: Hosted file repository capacity.
+- name: Data Page Size
+  scope: request
+  metric: objects
+  limit: 100
+  notes: Maximum objects returned per data find request via pageSize.
+- name: Scale Peak RPM Tier
+  scope: account
+  metric: requests_per_minute
+  limit: tiered (billing, not a hard cap)
+  notes: Daily Scale billing tier is set by the day's peak API requests per minute.
+policies:
+- name: Un-Throttled API Calls
+  description: All Backendless Cloud plans provide unlimited, un-throttled API calls; capacity scales with plan resources and Scale billing tiers.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on any 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

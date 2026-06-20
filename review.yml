@@ -1,0 +1,88 @@
+aid: backendless
+name: Backendless
+review:
+  question: Does Backendless expose a documented public WebSocket API?
+  answer: partial
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Backendless ships a Real-Time (RT) Database and Real-Time Messaging
+    capability that uses a persistent WebSocket transport via the socket.io
+    library. However, that real-time channel is consumed only through the
+    Backendless client SDKs (JS, Android/Java, iOS, etc.) and is not published
+    as a standalone, documented WebSocket protocol contract (handshake, event
+    names, message envelopes) for arbitrary third-party clients. No AsyncAPI
+    document was authored because there is no documented wire-level WebSocket
+    surface to model accurately; modeling the socket.io internals would be
+    speculative. The publicly documented REST surface (data, users, files,
+    messaging/push, geo, cache, counters, cloud code) is fully captured in
+    openapi/backendless-openapi.yml. Real-time message retrieval over REST is
+    polling-based, not a WebSocket.
+findings:
+  summary: |
+    Backendless exposes a comprehensive documented REST API for all core
+    services under https://api.backendless.com/{app-id}/{rest-api-key}/...,
+    authenticated with the application id and REST API key in the URL path plus
+    a user-token header for authenticated sessions. Separately, Backendless
+    provides Real-Time Database and Real-Time Messaging features that maintain
+    live client/server synchronization over a WebSocket transport implemented
+    with socket.io. That real-time layer is exposed through the official client
+    SDKs and is not documented as an independent, vendor-neutral WebSocket
+    protocol that third parties can implement directly. Pub/sub message
+    retrieval over the REST API is polling-based. Accordingly the WebSocket
+    answer is "partial": a real-time WebSocket transport exists and is real, but
+    there is no public, documented WebSocket protocol contract to model.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.backendless.com/{app-id}/{rest-api-key}
+      documented: true
+    - protocol: WebSocket (socket.io)
+      scheme: wss
+      documented: false
+      note: >-
+        Used by Backendless RT Database and RT Messaging via the socket.io
+        library. Surfaced through the client SDKs, not as a documented public
+        WebSocket protocol contract for third-party clients.
+  endpointsConfirmedRest:
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}
+    - PUT    https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}
+    - DELETE https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/count
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/users/register
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/users/login
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/users/logout
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/users/restorepassword/{identity}
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/files/{path}
+    - DELETE https://api.backendless.com/{app-id}/{rest-api-key}/files/{path}
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/messaging/{channel-name}
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/messaging/email
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/geo/points
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/geo/points
+    - PUT    https://api.backendless.com/{app-id}/{rest-api-key}/cache/{key}
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/cache/{key}
+    - PUT    https://api.backendless.com/{app-id}/{rest-api-key}/counters/{counter-name}/increment/get
+    - GET    https://api.backendless.com/{app-id}/{rest-api-key}/counters/{counter-name}/get
+    - POST   https://api.backendless.com/{app-id}/{rest-api-key}/services/{service-name}/{method-name}
+sources:
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+    note: Lists the documented REST services (data, users, files, messaging, push, geo, cache, counters, cloud code).
+  - url: https://backendless.com/quick-start-guide-for-rest-api/
+    type: Documentation
+    note: Confirms the api.backendless.com/{app-id}/{rest-api-key} base URL pattern and user-token header.
+  - url: https://backendless.com/docs/android/rt_overview.html
+    type: Documentation
+    note: Describes RT Database/Messaging built on socket.io, consumed via client SDKs; no standalone WebSocket protocol contract is documented.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    A real WebSocket transport (socket.io) backs Backendless RT, but it is not
+    published as a documented, vendor-neutral WebSocket protocol contract for
+    third-party clients, so no AsyncAPI document was authored to avoid
+    misrepresenting SDK-internal behavior as a public protocol. The full
+    documented REST surface is modeled in openapi/backendless-openapi.yml.

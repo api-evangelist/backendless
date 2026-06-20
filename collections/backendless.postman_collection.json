@@ -1,0 +1,383 @@
+{
+  "info": {
+    "_postman_id": "b1c0de55-ba5e-4a2c-9f10-7e0b2a3d5c01",
+    "name": "Backendless REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. The application id and REST API key are carried in the URL path; the user-token header authenticates user sessions.\n\nContact Support:\n Name: Backendless Support\n URL: https://support.backendless.com",
+      "type": "text/plain"
+    }
+  },
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.backendless.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "APP_ID",
+      "key": "appId"
+    },
+    {
+      "type": "string",
+      "value": "REST_API_KEY",
+      "key": "restApiKey"
+    },
+    {
+      "type": "string",
+      "value": "",
+      "key": "userToken"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "user-token" },
+      { "key": "value", "value": "{{userToken}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Data",
+      "description": { "content": "CRUD and search over database tables.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Save a single object",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName"],
+              "variable": [{ "key": "tableName", "value": "Person" }]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Bob\",\n  \"age\": 20\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Find objects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName?where=&pageSize=10&offset=0&sortBy=",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName"],
+              "query": [
+                { "key": "where", "value": "" },
+                { "key": "pageSize", "value": "10" },
+                { "key": "offset", "value": "0" },
+                { "key": "sortBy", "value": "" }
+              ],
+              "variable": [{ "key": "tableName", "value": "Person" }]
+            }
+          }
+        },
+        {
+          "name": "Retrieve object by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName/:objectId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName", ":objectId"],
+              "variable": [{ "key": "tableName", "value": "Person" }, { "key": "objectId", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update a single object",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName/:objectId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName", ":objectId"],
+              "variable": [{ "key": "tableName", "value": "Person" }, { "key": "objectId", "value": "" }]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"age\": 21\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Delete a single object",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName/:objectId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName", ":objectId"],
+              "variable": [{ "key": "tableName", "value": "Person" }, { "key": "objectId", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Count objects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/data/:tableName/count",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "data", ":tableName", "count"],
+              "variable": [{ "key": "tableName", "value": "Person" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": { "content": "Registration, authentication, and session management.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Register a new user",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/users/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "users", "register"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"secret\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Log in a user",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/users/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "users", "login"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"login\": \"user@example.com\",\n  \"password\": \"secret\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Log out the current user",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "user-token", "value": "{{userToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/users/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "users", "logout"]
+            }
+          }
+        },
+        {
+          "name": "Initiate password recovery",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/users/restorepassword/:identity",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "users", "restorepassword", ":identity"],
+              "variable": [{ "key": "identity", "value": "user@example.com" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "description": { "content": "File and directory storage operations.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Upload a file",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/files/:path?overwrite=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "files", ":path"],
+              "query": [{ "key": "overwrite", "value": "true" }],
+              "variable": [{ "key": "path", "value": "images/photo.png" }]
+            },
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": [] }] }
+          }
+        },
+        {
+          "name": "Delete a file or directory",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/files/:path",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "files", ":path"],
+              "variable": [{ "key": "path", "value": "images/photo.png" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messaging",
+      "description": { "content": "Publish-subscribe messaging, push, and email.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Publish a message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/messaging/:channelName",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "messaging", ":channelName"],
+              "variable": [{ "key": "channelName", "value": "default" }]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"Hello\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Send a basic email",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/messaging/email",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "messaging", "email"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"subject\": \"Hello\",\n  \"to\": [\"user@example.com\"],\n  \"bodyparts\": { \"textmessage\": \"Hi there\" }\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Geo",
+      "description": { "content": "Geolocation point management and proximity search.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Search geo points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/geo/points?categories=Default&lat=37.77&lon=-122.41&radius=1000&units=METERS",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "geo", "points"],
+              "query": [
+                { "key": "categories", "value": "Default" },
+                { "key": "lat", "value": "37.77" },
+                { "key": "lon", "value": "-122.41" },
+                { "key": "radius", "value": "1000" },
+                { "key": "units", "value": "METERS" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add a geo point",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/geo/points",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "geo", "points"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"latitude\": 37.77,\n  \"longitude\": -122.41,\n  \"categories\": [\"Default\"]\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cache",
+      "description": { "content": "Server-side key/value cache.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Put a value into cache",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/cache/:key?timeout=60000",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "cache", ":key"],
+              "query": [{ "key": "timeout", "value": "60000" }],
+              "variable": [{ "key": "key", "value": "my-key" }]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"value\": \"cached\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Retrieve a cached value",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/cache/:key",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "cache", ":key"],
+              "variable": [{ "key": "key", "value": "my-key" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Counters",
+      "description": { "content": "Thread-safe atomic counters.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Increment by 1 and return current",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/counters/:counterName/increment/get",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "counters", ":counterName", "increment", "get"],
+              "variable": [{ "key": "counterName", "value": "visits" }]
+            }
+          }
+        },
+        {
+          "name": "Get the current counter value",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/counters/:counterName/get",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "counters", ":counterName", "get"],
+              "variable": [{ "key": "counterName", "value": "visits" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CloudCode",
+      "description": { "content": "Invocation of custom serverless API services.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Invoke a custom Cloud Code service method",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/{{appId}}/{{restApiKey}}/services/:serviceName/:methodName",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{appId}}", "{{restApiKey}}", "services", ":serviceName", ":methodName"],
+              "variable": [{ "key": "serviceName", "value": "MyService" }, { "key": "methodName", "value": "myMethod" }]
+            },
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    }
+  ]
+}

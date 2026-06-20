@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{userToken}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Data", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Save a single object", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}",
+            "body": { "type": "json", "data": "{\"name\":\"Bob\",\"age\":20}" }
+          },
+          "docs": "Persists a new object into the named table; Backendless assigns the objectId."
+        },
+        {
+          "info": { "name": "Find objects", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}?where=&pageSize=10&offset=0&sortBy="
+          },
+          "docs": "Retrieves a collection of objects with optional where, paging, sorting, relations, and grouping."
+        },
+        {
+          "info": { "name": "Retrieve object by id", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}"
+          },
+          "docs": "Retrieves a single object by its objectId."
+        },
+        {
+          "info": { "name": "Update a single object", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}",
+            "body": { "type": "json", "data": "{\"age\":21}" }
+          },
+          "docs": "Updates the supplied properties for the identified object."
+        },
+        {
+          "info": { "name": "Delete a single object", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/{object-id}"
+          },
+          "docs": "Deletes a single object and returns the deletion timestamp."
+        },
+        {
+          "info": { "name": "Count objects", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/{table-name}/count?where="
+          },
+          "docs": "Returns the number of objects matching an optional where clause."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Register a new user", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/register",
+            "body": { "type": "json", "data": "{\"email\":\"user@example.com\",\"password\":\"secret\"}" }
+          },
+          "docs": "Creates a new user in the Users table."
+        },
+        {
+          "info": { "name": "Log in a user", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/login",
+            "body": { "type": "json", "data": "{\"login\":\"user@example.com\",\"password\":\"secret\"}" }
+          },
+          "docs": "Authenticates a user and returns a user-token for subsequent requests."
+        },
+        {
+          "info": { "name": "Log out the current user", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/logout"
+          },
+          "docs": "Invalidates the current user session."
+        },
+        {
+          "info": { "name": "Initiate password recovery", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/restorepassword/{identity}"
+          },
+          "docs": "Sends a password recovery email to the given user identity."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Files", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Upload a file", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/files/{path}?overwrite=true",
+            "body": { "type": "multipart-form", "data": [] }
+          },
+          "docs": "Uploads a file to the given path, creating missing directories."
+        },
+        {
+          "info": { "name": "Delete a file or directory", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/files/{path}"
+          },
+          "docs": "Deletes a file or directory from the file repository."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Messaging", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Publish a message", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/messaging/{channel-name}",
+            "body": { "type": "json", "data": "{\"message\":\"Hello\"}" }
+          },
+          "docs": "Publishes a message to a channel; the same endpoint dispatches push notifications."
+        },
+        {
+          "info": { "name": "Send a basic email", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/messaging/email",
+            "body": { "type": "json", "data": "{\"subject\":\"Hello\",\"to\":[\"user@example.com\"],\"bodyparts\":{\"textmessage\":\"Hi there\"}}" }
+          },
+          "docs": "Sends a basic email to one or more recipients."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Geo", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Search geo points", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/geo/points?categories=Default&lat=37.77&lon=-122.41&radius=1000&units=METERS"
+          },
+          "docs": "Finds geo points by category and proximity (radius search)."
+        },
+        {
+          "info": { "name": "Add a geo point", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/geo/points",
+            "body": { "type": "json", "data": "{\"latitude\":37.77,\"longitude\":-122.41,\"categories\":[\"Default\"]}" }
+          },
+          "docs": "Adds or updates a geo point."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Cache", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Put a value into cache", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/{key}?timeout=60000",
+            "body": { "type": "json", "data": "{\"value\":\"cached\"}" }
+          },
+          "docs": "Stores a value in the cache with an optional TTL in milliseconds."
+        },
+        {
+          "info": { "name": "Retrieve a cached value", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/{key}"
+          },
+          "docs": "Retrieves a cached value by key."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Counters", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Increment by 1 and return current", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/{counter-name}/increment/get"
+          },
+          "docs": "Atomically increments the counter by one and returns the new value."
+        },
+        {
+          "info": { "name": "Get the current counter value", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/{counter-name}/get"
+          },
+          "docs": "Returns the current counter value."
+        }
+      ]
+    },
+    {
+      "info": { "name": "CloudCode", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Invoke a custom Cloud Code service method", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/services/{service-name}/{method-name}",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Calls a method on a developer-defined serverless API service deployed to Cloud Code."
+        }
+      ]
+    }
+  ]
+}

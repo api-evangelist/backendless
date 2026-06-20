@@ -1,0 +1,852 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST API
+  description: >-
+    REST API for the Backendless backend-as-a-service platform. Every request is
+    addressed to a specific application using its application id and REST API key,
+    both carried as path segments immediately after the host. Authenticated
+    operations additionally require the user-token returned by the login endpoint,
+    sent in the user-token request header. This specification covers the core
+    documented services - Data, Users, Files, Messaging and Push, Geo, Cache,
+    Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+  - url: https://api.backendless.com/{app-id}/{rest-api-key}
+    description: Backendless application endpoint
+    variables:
+      app-id:
+        default: APP_ID
+        description: The application id assigned to your Backendless app.
+      rest-api-key:
+        default: REST_API_KEY
+        description: The REST API key generated for your Backendless app.
+security:
+  - userToken: []
+tags:
+  - name: Data
+    description: CRUD and search over schema-backed database tables.
+  - name: Users
+    description: User registration, authentication, and session management.
+  - name: Files
+    description: File and directory storage operations.
+  - name: Messaging
+    description: Publish-subscribe messaging, push notifications, and email.
+  - name: Geo
+    description: Geolocation point management and proximity search.
+  - name: Cache
+    description: Server-side key/value cache.
+  - name: Counters
+    description: Thread-safe atomic counters.
+  - name: CloudCode
+    description: Invocation of custom serverless API services.
+paths:
+  /data/{table-name}:
+    post:
+      operationId: createObject
+      tags:
+        - Data
+      summary: Save a single object
+      description: >-
+        Persists a new object into the named table. The request body must not
+        include an objectId; Backendless assigns one and returns the saved object.
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              example:
+                name: Bob
+                age: 20
+      responses:
+        '200':
+          description: The saved object with a system-assigned objectId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: findObjects
+      tags:
+        - Data
+      summary: Find objects
+      description: >-
+        Retrieves a collection of objects from a table with optional filtering,
+        paging, sorting, relations, grouping, and property projection.
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+        - name: where
+          in: query
+          description: SQL-like search clause applied to the table.
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Number of objects to return per page (max 100).
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          description: Zero-based index of the first object to return.
+          schema:
+            type: integer
+            default: 0
+        - name: sortBy
+          in: query
+          description: Comma-separated list of properties to sort by.
+          schema:
+            type: string
+        - name: property
+          in: query
+          description: Comma-separated list of properties (or aggregates) to return.
+          schema:
+            type: string
+        - name: loadRelations
+          in: query
+          description: Comma-separated list of related columns to eager-load.
+          schema:
+            type: string
+        - name: groupBy
+          in: query
+          description: Comma-separated list of columns to group results by.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A collection of matching objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+  /data/{table-name}/{object-id}:
+    get:
+      operationId: getObjectById
+      tags:
+        - Data
+      summary: Retrieve object by id
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+        - $ref: '#/components/parameters/ObjectId'
+      responses:
+        '200':
+          description: The requested object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '404':
+          $ref: '#/components/responses/Error'
+    put:
+      operationId: updateObject
+      tags:
+        - Data
+      summary: Update a single object
+      description: Updates the properties supplied in the body for the identified object.
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+        - $ref: '#/components/parameters/ObjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The updated object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: deleteObject
+      tags:
+        - Data
+      summary: Delete a single object
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+        - $ref: '#/components/parameters/ObjectId'
+      responses:
+        '200':
+          description: Deletion timestamp.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deletionTime:
+                    type: integer
+                    format: int64
+        '404':
+          $ref: '#/components/responses/Error'
+  /data/{table-name}/count:
+    get:
+      operationId: countObjects
+      tags:
+        - Data
+      summary: Count objects
+      description: Returns the number of objects in a table matching an optional where clause.
+      parameters:
+        - $ref: '#/components/parameters/TableName'
+        - name: where
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The matching object count.
+          content:
+            application/json:
+              schema:
+                type: integer
+  /users/register:
+    post:
+      operationId: registerUser
+      tags:
+        - Users
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: The created user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/Error'
+  /users/login:
+    post:
+      operationId: loginUser
+      tags:
+        - Users
+      summary: Log in a user
+      description: >-
+        Authenticates a user with an identity (e.g. email) and password. The
+        response includes a user-token that must be sent in the user-token header
+        on subsequent authenticated requests.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated user object including user-token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Error'
+  /users/logout:
+    get:
+      operationId: logoutUser
+      tags:
+        - Users
+      summary: Log out the current user
+      responses:
+        '200':
+          description: The session was invalidated.
+        '401':
+          $ref: '#/components/responses/Error'
+  /users/restorepassword/{identity}:
+    get:
+      operationId: restorePassword
+      tags:
+        - Users
+      summary: Initiate password recovery
+      security: []
+      parameters:
+        - name: identity
+          in: path
+          required: true
+          description: The user identity (e.g. email) to recover.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A recovery email was sent.
+        '400':
+          $ref: '#/components/responses/Error'
+  /files/{path}:
+    post:
+      operationId: uploadFile
+      tags:
+        - Files
+      summary: Upload a file
+      description: >-
+        Uploads a file to the given path in the hosted file repository. Missing
+        directories in the path are created automatically.
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: Directory path and filename, e.g. images/photo.png.
+          schema:
+            type: string
+        - name: overwrite
+          in: query
+          description: Whether to overwrite an existing file at the path.
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Metadata for the uploaded file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        '400':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: deleteFile
+      tags:
+        - Files
+      summary: Delete a file or directory
+      parameters:
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The file or directory was deleted.
+        '404':
+          $ref: '#/components/responses/Error'
+  /messaging/{channel-name}:
+    post:
+      operationId: publishMessage
+      tags:
+        - Messaging
+      summary: Publish a message
+      description: >-
+        Publishes a message to a named channel. The same channel endpoint is used
+        to dispatch mobile push notifications by supplying push headers and a
+        delivery policy (singlecast or broadcast) in the body.
+      parameters:
+        - name: channel-name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+      responses:
+        '200':
+          description: Publish acknowledgement with a message id and status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+        '400':
+          $ref: '#/components/responses/Error'
+  /messaging/{channel-name}/{subscription-id}:
+    get:
+      operationId: pollMessages
+      tags:
+        - Messaging
+      summary: Poll for messages
+      description: Retrieves messages buffered for an established polling subscription.
+      parameters:
+        - name: channel-name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscription-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Buffered messages for the subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/Error'
+  /messaging/email:
+    post:
+      operationId: sendEmail
+      tags:
+        - Messaging
+      summary: Send a basic email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequest'
+      responses:
+        '200':
+          description: The email was queued for delivery.
+        '400':
+          $ref: '#/components/responses/Error'
+  /geo/points:
+    get:
+      operationId: findGeoPoints
+      tags:
+        - Geo
+      summary: Search geo points
+      description: >-
+        Finds geo points by category and proximity. Supply latitude/longitude with
+        a radius and units for a radius search.
+      parameters:
+        - name: categories
+          in: query
+          schema:
+            type: string
+        - name: lat
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: lon
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: radius
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: units
+          in: query
+          schema:
+            type: string
+            enum: [METERS, KILOMETERS, MILES, YARDS, FEET]
+      responses:
+        '200':
+          description: Matching geo points.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeoPoint'
+        '400':
+          $ref: '#/components/responses/Error'
+    post:
+      operationId: saveGeoPoint
+      tags:
+        - Geo
+      summary: Add a geo point
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeoPoint'
+      responses:
+        '200':
+          description: The saved geo point.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoPoint'
+        '400':
+          $ref: '#/components/responses/Error'
+  /cache/{key}:
+    put:
+      operationId: cachePut
+      tags:
+        - Cache
+      summary: Put a value into cache
+      parameters:
+        - $ref: '#/components/parameters/CacheKey'
+        - name: timeout
+          in: query
+          description: Time-to-live in milliseconds.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The value was cached.
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: cacheGet
+      tags:
+        - Cache
+      summary: Retrieve a cached value
+      parameters:
+        - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: The cached value.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '404':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: cacheDelete
+      tags:
+        - Cache
+      summary: Delete a cached value
+      parameters:
+        - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: The cached value was removed.
+  /cache/{key}/check:
+    get:
+      operationId: cacheContains
+      tags:
+        - Cache
+      summary: Check if a key exists in cache
+      parameters:
+        - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: Whether the key exists.
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /counters/{counter-name}/increment/get:
+    put:
+      operationId: incrementAndGet
+      tags:
+        - Counters
+      summary: Increment by 1 and return current
+      description: Atomically increments the counter by one and returns the new value.
+      parameters:
+        - $ref: '#/components/parameters/CounterName'
+      responses:
+        '200':
+          description: The current counter value after incrementing.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /counters/{counter-name}/incrementby/get:
+    put:
+      operationId: incrementByAndGet
+      tags:
+        - Counters
+      summary: Increment by N and return current
+      parameters:
+        - $ref: '#/components/parameters/CounterName'
+        - name: value
+          in: query
+          required: true
+          description: Amount to add to the counter.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The current counter value after incrementing.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /counters/{counter-name}/get:
+    get:
+      operationId: getCounter
+      tags:
+        - Counters
+      summary: Get the current counter value
+      parameters:
+        - $ref: '#/components/parameters/CounterName'
+      responses:
+        '200':
+          description: The current counter value.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /counters/{counter-name}/reset:
+    put:
+      operationId: resetCounter
+      tags:
+        - Counters
+      summary: Reset a counter to zero
+      parameters:
+        - $ref: '#/components/parameters/CounterName'
+      responses:
+        '200':
+          description: The counter was reset.
+  /services/{service-name}/{method-name}:
+    post:
+      operationId: invokeCloudCodeService
+      tags:
+        - CloudCode
+      summary: Invoke a custom Cloud Code service method
+      description: >-
+        Calls a method on a developer-defined serverless API service deployed to
+        Backendless Cloud Code. The request and response shapes are defined by the
+        custom service implementation.
+      parameters:
+        - name: service-name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: method-name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The value returned by the custom service method.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/Error'
+components:
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: >-
+        Session token returned by POST /users/login. Required on operations that
+        run in the context of an authenticated user. The application id and REST
+        API key that scope every request are carried in the server URL path rather
+        than as a security scheme.
+  parameters:
+    TableName:
+      name: table-name
+      in: path
+      required: true
+      description: Name of the database table (data store class).
+      schema:
+        type: string
+    ObjectId:
+      name: object-id
+      in: path
+      required: true
+      description: System-assigned objectId of a stored object.
+      schema:
+        type: string
+    CacheKey:
+      name: key
+      in: path
+      required: true
+      description: Cache entry key.
+      schema:
+        type: string
+    CounterName:
+      name: counter-name
+      in: path
+      required: true
+      description: Name of the atomic counter.
+      schema:
+        type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    DataObject:
+      type: object
+      description: A persisted object. Includes Backendless system properties.
+      properties:
+        objectId:
+          type: string
+        created:
+          type: integer
+          format: int64
+        updated:
+          type: integer
+          format: int64
+        ownerId:
+          type: string
+        ___class:
+          type: string
+      additionalProperties: true
+    RegistrationRequest:
+      type: object
+      required:
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      additionalProperties: true
+    LoginRequest:
+      type: object
+      required:
+        - login
+        - password
+      properties:
+        login:
+          type: string
+          description: User identity value, typically the email address.
+        password:
+          type: string
+    User:
+      type: object
+      properties:
+        objectId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        user-token:
+          type: string
+          description: Session token for subsequent authenticated requests.
+        userStatus:
+          type: string
+      additionalProperties: true
+    FileInfo:
+      type: object
+      properties:
+        fileURL:
+          type: string
+          format: uri
+    PublishMessageRequest:
+      type: object
+      properties:
+        message:
+          description: Arbitrary message payload (string or object).
+        headers:
+          type: object
+          additionalProperties: true
+        publishAt:
+          type: integer
+          format: int64
+        pushPolicy:
+          type: string
+          enum: [ONLY, ALSO, NONE]
+        pushBroadcast:
+          type: integer
+        pushSinglecast:
+          type: array
+          items:
+            type: string
+    MessageStatus:
+      type: object
+      properties:
+        messageId:
+          type: string
+        status:
+          type: string
+        errorMessage:
+          type: string
+    EmailRequest:
+      type: object
+      required:
+        - subject
+        - to
+      properties:
+        subject:
+          type: string
+        to:
+          type: array
+          items:
+            type: string
+        bodyparts:
+          type: object
+          properties:
+            textmessage:
+              type: string
+            htmlmessage:
+              type: string
+    GeoPoint:
+      type: object
+      properties:
+        objectId:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        categories:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        distance:
+          type: number
+          format: double
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string

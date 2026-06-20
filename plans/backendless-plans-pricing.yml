@@ -1,0 +1,232 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Backendless
+providerId: backendless
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- BaaS
+- Backend as a Service
+- Visual Development
+- Low Code
+- Database
+- Plans
+description: >-
+  Backendless Cloud is offered as a free tier and a usage-metered Scale plan.
+  The Free plan provides the full platform for development with capped resources
+  (file storage, data tables, and real-time connections) and unlimited API calls.
+  The Scale plan removes development caps and bills daily based on peak API
+  requests per minute across a tiered schedule, with optional function packs for
+  additional messaging, storage, and real-time connections. Backendless Pro
+  (self-hosted) and Managed Backendless are also available for teams that need
+  on-premise or managed deployments.
+notes: >-
+  Pricing reflects the published Backendless Cloud pricing pages as of the
+  created date. The Scale plan bills on peak API requests-per-minute tiers that
+  range from roughly $0.50/day at the lowest tier to several hundred dollars per
+  day at the highest; verify the current tier table and function-pack rates on
+  the pricing page during reconciliation.
+sources:
+- https://backendless.com/pricing/
+- https://backendless.com/pricing/backendless-cloud/
+- https://backendless.com/introducing-scale-plan/
+plans:
+- id: backendless-free
+  name: Free
+  type: free
+  description: >-
+    Full-platform free tier for development and testing with no credit card
+    required. Unlimited API calls with capped storage, tables, and real-time
+    connections.
+  entries:
+  - label: API Calls
+    name: api_calls
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included (unlimited)
+    userMultiplied: false
+  - label: File Storage
+    name: file_storage
+    type: flat
+    metric: gigabytes
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Data Tables
+    name: data_tables
+    type: flat
+    metric: tables
+    limit: 20
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Real-Time Connections
+    name: realtime_connections
+    type: flat
+    metric: connections
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Data Service
+  - name: User Service
+  - name: File Service
+  - name: Messaging and Push
+  - name: Geo Service
+  - name: Cache and Counters
+  - name: Cloud Code
+- id: backendless-scale
+  name: Scale
+  type: usage
+  description: >-
+    Usage-metered production plan billed daily based on peak API requests per
+    minute across a tiered schedule. Raises development caps and unlocks function
+    packs for additional capacity.
+  entries:
+  - label: API Calls
+    name: api_calls
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included (unlimited); billed via daily peak RPM tiers
+    userMultiplied: false
+  - label: Peak RPM Billing Tier
+    name: scale_rpm_tier
+    type: usage
+    metric: requests_per_minute
+    limit: -1
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: tiered, from ~$0.50/day (0-5 RPM) up to ~$230/day (7,001-10,000 RPM)
+    userMultiplied: false
+  - label: File Storage
+    name: file_storage
+    type: flat
+    metric: gigabytes
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Data Tables
+    name: data_tables
+    type: flat
+    metric: tables
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Real-Time Connections
+    name: realtime_connections
+    type: flat
+    metric: connections
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Messaging Function Pack
+    name: pack_messaging
+    type: usage
+    metric: messages
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 100000
+    price: $10 per month per 100,000 messages
+    userMultiplied: false
+  - label: File Storage Function Pack
+    name: pack_file_storage
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 10
+    price: $20 per month per additional 10 GB
+    userMultiplied: false
+  - label: Real-Time Connections Function Pack
+    name: pack_realtime
+    type: usage
+    metric: connections
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 10000
+    price: $50 per month per additional 10,000 connections
+    userMultiplied: false
+  elements:
+  - name: Data Service
+  - name: User Service
+  - name: File Service
+  - name: Messaging and Push
+  - name: Geo Service
+  - name: Cache and Counters
+  - name: Cloud Code
+- id: backendless-pro
+  name: Backendless Pro
+  type: license
+  description: >-
+    Self-hosted, on-premise installation of the Backendless platform with free
+    licensing and full functionality, run on infrastructure you control.
+  entries:
+  - label: Pro License
+    name: pro_license
+    type: flat
+    metric: license
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: free licensing (self-hosted; you provide infrastructure)
+    userMultiplied: false
+  elements:
+  - name: Self-Hosted Platform
+  - name: Full Functionality
+- id: backendless-managed
+  name: Managed Backendless
+  type: enterprise
+  description: >-
+    Premium subscription in which Backendless operates and monitors a Pro
+    installation on your behalf with 24x7x365 monitoring and support. Contact
+    Backendless sales.
+  entries:
+  - label: Managed Subscription
+    name: managed
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Managed Pro Installation
+  - name: 24x7x365 Monitoring
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

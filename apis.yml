@@ -1,0 +1,205 @@
+aid: backendless
+url: https://raw.githubusercontent.com/api-evangelist/backendless/refs/heads/main/apis.yml
+name: Backendless
+kind: company
+description: Backendless is a visual app development and backend-as-a-service (BaaS)
+  platform that exposes a full set of REST APIs for data persistence, user management,
+  file storage, publish-subscribe messaging, push notifications, geolocation, caching,
+  and atomic counters, plus serverless Cloud Code (custom API services and timers).
+  Requests are authenticated with an application id and REST API key carried in the
+  URL path and a user-token header for authenticated sessions.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- BaaS
+- Backend as a Service
+- Visual Development
+- Low Code
+- Database
+- Realtime
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: backendless:data
+  name: Backendless Data Service API
+  tags:
+  - Data
+  - Database
+  - CRUD
+  - Tables
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/data_data_object_management.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/data
+  properties:
+  - url: https://backendless.com/docs/rest/data_data_object_management.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: CRUD persistence over schema-backed tables - save, update, upsert,
+    and delete single or bulk objects, plus rich search with where clauses, paging,
+    sorting, relations, grouping, and aggregate functions.
+- aid: backendless:users
+  name: Backendless User Service API
+  tags:
+  - Users
+  - Authentication
+  - Roles
+  - Sessions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/users_login.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/users
+  properties:
+  - url: https://backendless.com/docs/rest/users_user_registration.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: User registration, login, logout, password recovery, email confirmation,
+    current-user lookup, and role assignment. Login returns a user-token used as a
+    header on subsequent authenticated requests.
+- aid: backendless:files
+  name: Backendless File Service API
+  tags:
+  - Files
+  - Storage
+  - Upload
+  - Hosting
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/files_file_upload.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/files
+  properties:
+  - url: https://backendless.com/docs/rest/files_file_upload.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: Upload, download, copy, move, rename, and delete files and directories
+    in the hosted file repository, with directory listing and permission controls.
+- aid: backendless:messaging
+  name: Backendless Messaging and Push API
+  tags:
+  - Messaging
+  - Pub Sub
+  - Push Notifications
+  - Email
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/pubsub_overview.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/messaging
+  properties:
+  - url: https://backendless.com/docs/rest/pubsub_general_publish_api.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/push_push_with_api.html
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: Publish-subscribe message exchange over named channels, polling-based
+    message retrieval, mobile push notifications (singlecast/broadcast), device
+    registration, and templated email delivery.
+- aid: backendless:geo
+  name: Backendless Geo Service API
+  tags:
+  - Geo
+  - Geolocation
+  - Spatial
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/geo_geocategories.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/geo
+  properties:
+  - url: https://backendless.com/docs/rest/geo_geocategories.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: Geo point management organized into categories with metadata, plus
+    radius and rectangle proximity search and relative-distance queries against
+    stored geo points.
+- aid: backendless:cache-counters
+  name: Backendless Cache and Atomic Counters API
+  tags:
+  - Cache
+  - Counters
+  - Atomic
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/cache_overview.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}
+  properties:
+  - url: https://backendless.com/docs/rest/cache_overview.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/counters_overview.html
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: Server-side key/value cache with put, get, contains, expire, and
+    delete operations, and thread-safe atomic counters supporting increment,
+    decrement, add-and-get, get, compare-and-set, and reset.
+- aid: backendless:cloud-code
+  name: Backendless Cloud Code API
+  tags:
+  - Cloud Code
+  - Serverless
+  - Custom API
+  - Timers
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://backendless.com/docs/rest/doc.html
+  baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/services
+  properties:
+  - url: https://backendless.com/docs/rest/doc.html
+    type: Documentation
+  - url: https://backendless.com/docs/rest/
+    type: APIReference
+  - url: openapi/backendless-openapi.yml
+    type: OpenAPI
+  - url: collections/backendless.postman_collection.json
+    type: PostmanCollection
+  - url: collections/backendless.opencollection.json
+    type: OpenCollection
+  description: Invoke developer-defined serverless API services and methods deployed
+    as Cloud Code, alongside event handlers and scheduled timers that run custom
+    business logic in the Backendless runtime.
+common:
+- type: GitHubOrganization
+  url: https://github.com/Backendless
+- type: LinkedIn
+  url: https://www.linkedin.com/company/backendless
+- type: Website
+  url: https://backendless.com
+- type: Documentation
+  url: https://backendless.com/docs/rest/
+- type: Plans
+  url: plans/backendless-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/backendless-rate-limits.yml
+- type: FinOps
+  url: finops/backendless-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

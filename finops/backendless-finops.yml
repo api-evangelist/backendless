@@ -1,0 +1,106 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Backendless
+providerId: backendless
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- BaaS
+- Backend as a Service
+- Database
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Backendless Cloud spend. Backendless does not meter API calls;
+  instead the Scale plan bills daily based on the peak API requests-per-minute
+  tier reached each day, while resource capacity (file storage, data tables,
+  real-time connections) is governed by plan caps and incremental function
+  packs. The Free plan carries no charge. Self-hosted Pro is free to license, and
+  Managed Backendless is a negotiated subscription.
+notes: >-
+  Daily Scale billing is driven by peak requests-per-minute tiers; spikes in
+  traffic move the account into higher daily tiers. Verify the current tier
+  schedule and function-pack rates on the pricing page during reconciliation.
+sources:
+- https://backendless.com/pricing/backendless-cloud/
+- https://backendless.com/introducing-scale-plan/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Backendless
+serviceCategory: Developer Tools and Platforms
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Daily
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Backendless Cloud
+  ServiceCategory: Developer Tools and Platforms
+  ProviderName: Backendless
+  PublisherName: Backendless
+  InvoiceIssuerName: Backendless
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: peak_requests_per_minute
+  description: Daily peak API requests per minute that determines the Scale plan billing tier for the day.
+  unit: requests_per_minute
+  aggregation: max
+  dimensions:
+  - account
+  - day
+- name: file_storage_gb
+  description: File repository capacity consumed, capped by plan and extended by storage function packs.
+  unit: gigabytes
+  aggregation: max
+  dimensions:
+  - account
+- name: data_tables
+  description: Number of database tables in use against the plan cap.
+  unit: tables
+  aggregation: max
+  dimensions:
+  - account
+- name: realtime_connections
+  description: Concurrent real-time (Socket.IO) connections against the plan cap.
+  unit: connections
+  aggregation: max
+  dimensions:
+  - account
+- name: messages
+  description: Messaging volume billed via the messaging function pack at $10 per 100,000 messages.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+- name: function_packs
+  description: Add-on capacity packs (messaging, file storage, real-time connections) purchased on top of the plan.
+  unit: packs
+  aggregation: sum
+  dimensions:
+  - account
+  - pack_type
+principles:
+- name: Visibility
+  description: Track daily peak requests-per-minute and resource consumption in the Backendless console billing view.
+- name: Allocation
+  description: Separate applications (app-id/REST-API-key pairs) per workload or team to attribute spend.
+- name: Optimization
+  description: Smooth traffic spikes to stay in lower daily Scale tiers; right-size function packs; offload heavy reads with the cache service; self-host Pro where on-prem economics win.
+- name: Accountability
+  description: Assign owners per application; review daily tier movement and function-pack usage against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
