@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/backendless-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: userToken
+  type: apiKey
+  in: header
+  parameter: user-token
+  description: Session token returned by POST /users/login. Required on operations that run
+    in the context of an authenticated user. The application id and REST API key that scope
+    every request are carried in the server URL path rather than as a security scheme.
+  sources:
+  - openapi/backendless-openapi.yml

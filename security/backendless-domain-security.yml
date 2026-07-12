@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: backendless.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 01:27:46 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: backendless.com
+  dnssec: false
+  caa:
+  - 128 issue "letsencrypt.org"
+  - 128 issue "sectigo.com"
+  - 128 issuewild "sectigo.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

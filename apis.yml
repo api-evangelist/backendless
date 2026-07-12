@@ -186,6 +186,10 @@ apis:
     as Cloud Code, alongside event handlers and scheduled timers that run custom
     business logic in the Backendless runtime.
 common:
+- type: DomainSecurity
+  url: security/backendless-domain-security.yml
+- type: Authentication
+  url: authentication/backendless-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Backendless
 - type: LinkedIn
@@ -200,6 +204,8 @@ common:
   url: rate-limits/backendless-rate-limits.yml
 - type: FinOps
   url: finops/backendless-finops.yml
+- url: https://backendless.com/feed/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
