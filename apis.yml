@@ -186,6 +186,8 @@ apis:
     as Cloud Code, alongside event handlers and scheduled timers that run custom
     business logic in the Backendless runtime.
 common:
+- type: AgenticAccess
+  url: agentic-access/backendless-agentic-access.yml
 - type: DomainSecurity
   url: security/backendless-domain-security.yml
 - type: Authentication
