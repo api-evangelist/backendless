@@ -1,0 +1,172 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache Messaging API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Messaging
+  description: Publish-subscribe messaging, push notifications, and email.
+paths:
+  /messaging/{channel-name}:
+    post:
+      operationId: publishMessage
+      tags:
+      - Messaging
+      summary: Publish a message
+      description: Publishes a message to a named channel. The same channel endpoint is used to dispatch mobile push notifications by supplying push headers and a delivery policy (singlecast or broadcast) in the body.
+      parameters:
+      - name: channel-name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+      responses:
+        '200':
+          description: Publish acknowledgement with a message id and status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+        '400':
+          $ref: '#/components/responses/Error'
+  /messaging/{channel-name}/{subscription-id}:
+    get:
+      operationId: pollMessages
+      tags:
+      - Messaging
+      summary: Poll for messages
+      description: Retrieves messages buffered for an established polling subscription.
+      parameters:
+      - name: channel-name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription-id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Buffered messages for the subscription.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/Error'
+  /messaging/email:
+    post:
+      operationId: sendEmail
+      tags:
+      - Messaging
+      summary: Send a basic email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequest'
+      responses:
+        '200':
+          description: The email was queued for delivery.
+        '400':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    MessageStatus:
+      type: object
+      properties:
+        messageId:
+          type: string
+        status:
+          type: string
+        errorMessage:
+          type: string
+    EmailRequest:
+      type: object
+      required:
+      - subject
+      - to
+      properties:
+        subject:
+          type: string
+        to:
+          type: array
+          items:
+            type: string
+        bodyparts:
+          type: object
+          properties:
+            textmessage:
+              type: string
+            htmlmessage:
+              type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+    PublishMessageRequest:
+      type: object
+      properties:
+        message:
+          description: Arbitrary message payload (string or object).
+        headers:
+          type: object
+          additionalProperties: true
+        publishAt:
+          type: integer
+          format: int64
+        pushPolicy:
+          type: string
+          enum:
+          - ONLY
+          - ALSO
+          - NONE
+        pushBroadcast:
+          type: integer
+        pushSinglecast:
+          type: array
+          items:
+            type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.

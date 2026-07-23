@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache Users API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Users
+  description: User registration, authentication, and session management.
+paths:
+  /users/register:
+    post:
+      operationId: registerUser
+      tags:
+      - Users
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: The created user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/Error'
+  /users/login:
+    post:
+      operationId: loginUser
+      tags:
+      - Users
+      summary: Log in a user
+      description: Authenticates a user with an identity (e.g. email) and password. The response includes a user-token that must be sent in the user-token header on subsequent authenticated requests.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated user object including user-token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Error'
+  /users/logout:
+    get:
+      operationId: logoutUser
+      tags:
+      - Users
+      summary: Log out the current user
+      responses:
+        '200':
+          description: The session was invalidated.
+        '401':
+          $ref: '#/components/responses/Error'
+  /users/restorepassword/{identity}:
+    get:
+      operationId: restorePassword
+      tags:
+      - Users
+      summary: Initiate password recovery
+      security: []
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        description: The user identity (e.g. email) to recover.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A recovery email was sent.
+        '400':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+      - login
+      - password
+      properties:
+        login:
+          type: string
+          description: User identity value, typically the email address.
+        password:
+          type: string
+    RegistrationRequest:
+      type: object
+      required:
+      - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      additionalProperties: true
+    User:
+      type: object
+      properties:
+        objectId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        user-token:
+          type: string
+          description: Session token for subsequent authenticated requests.
+        userStatus:
+          type: string
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.

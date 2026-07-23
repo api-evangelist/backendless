@@ -1,0 +1,108 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache Files API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Files
+  description: File and directory storage operations.
+paths:
+  /files/{path}:
+    post:
+      operationId: uploadFile
+      tags:
+      - Files
+      summary: Upload a file
+      description: Uploads a file to the given path in the hosted file repository. Missing directories in the path are created automatically.
+      parameters:
+      - name: path
+        in: path
+        required: true
+        description: Directory path and filename, e.g. images/photo.png.
+        schema:
+          type: string
+      - name: overwrite
+        in: query
+        description: Whether to overwrite an existing file at the path.
+        schema:
+          type: boolean
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Metadata for the uploaded file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        '400':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: deleteFile
+      tags:
+      - Files
+      summary: Delete a file or directory
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The file or directory was deleted.
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+    FileInfo:
+      type: object
+      properties:
+        fileURL:
+          type: string
+          format: uri
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.

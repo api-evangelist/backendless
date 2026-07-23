@@ -1,0 +1,248 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache Data API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Data
+  description: CRUD and search over schema-backed database tables.
+paths:
+  /data/{table-name}:
+    post:
+      operationId: createObject
+      tags:
+      - Data
+      summary: Save a single object
+      description: Persists a new object into the named table. The request body must not include an objectId; Backendless assigns one and returns the saved object.
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              example:
+                name: Bob
+                age: 20
+      responses:
+        '200':
+          description: The saved object with a system-assigned objectId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: findObjects
+      tags:
+      - Data
+      summary: Find objects
+      description: Retrieves a collection of objects from a table with optional filtering, paging, sorting, relations, grouping, and property projection.
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      - name: where
+        in: query
+        description: SQL-like search clause applied to the table.
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Number of objects to return per page (max 100).
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        description: Zero-based index of the first object to return.
+        schema:
+          type: integer
+          default: 0
+      - name: sortBy
+        in: query
+        description: Comma-separated list of properties to sort by.
+        schema:
+          type: string
+      - name: property
+        in: query
+        description: Comma-separated list of properties (or aggregates) to return.
+        schema:
+          type: string
+      - name: loadRelations
+        in: query
+        description: Comma-separated list of related columns to eager-load.
+        schema:
+          type: string
+      - name: groupBy
+        in: query
+        description: Comma-separated list of columns to group results by.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A collection of matching objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+  /data/{table-name}/{object-id}:
+    get:
+      operationId: getObjectById
+      tags:
+      - Data
+      summary: Retrieve object by id
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      - $ref: '#/components/parameters/ObjectId'
+      responses:
+        '200':
+          description: The requested object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '404':
+          $ref: '#/components/responses/Error'
+    put:
+      operationId: updateObject
+      tags:
+      - Data
+      summary: Update a single object
+      description: Updates the properties supplied in the body for the identified object.
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      - $ref: '#/components/parameters/ObjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The updated object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataObject'
+        '400':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: deleteObject
+      tags:
+      - Data
+      summary: Delete a single object
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      - $ref: '#/components/parameters/ObjectId'
+      responses:
+        '200':
+          description: Deletion timestamp.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deletionTime:
+                    type: integer
+                    format: int64
+        '404':
+          $ref: '#/components/responses/Error'
+  /data/{table-name}/count:
+    get:
+      operationId: countObjects
+      tags:
+      - Data
+      summary: Count objects
+      description: Returns the number of objects in a table matching an optional where clause.
+      parameters:
+      - $ref: '#/components/parameters/TableName'
+      - name: where
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The matching object count.
+          content:
+            application/json:
+              schema:
+                type: integer
+components:
+  schemas:
+    DataObject:
+      type: object
+      description: A persisted object. Includes Backendless system properties.
+      properties:
+        objectId:
+          type: string
+        created:
+          type: integer
+          format: int64
+        updated:
+          type: integer
+          format: int64
+        ownerId:
+          type: string
+        ___class:
+          type: string
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TableName:
+      name: table-name
+      in: path
+      required: true
+      description: Name of the database table (data store class).
+      schema:
+        type: string
+    ObjectId:
+      name: object-id
+      in: path
+      required: true
+      description: System-assigned objectId of a stored object.
+      schema:
+        type: string
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.

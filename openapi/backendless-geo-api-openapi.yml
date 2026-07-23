@@ -1,0 +1,137 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache Geo API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Geo
+  description: Geolocation point management and proximity search.
+paths:
+  /geo/points:
+    get:
+      operationId: findGeoPoints
+      tags:
+      - Geo
+      summary: Search geo points
+      description: Finds geo points by category and proximity. Supply latitude/longitude with a radius and units for a radius search.
+      parameters:
+      - name: categories
+        in: query
+        schema:
+          type: string
+      - name: lat
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: lon
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: radius
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: units
+        in: query
+        schema:
+          type: string
+          enum:
+          - METERS
+          - KILOMETERS
+          - MILES
+          - YARDS
+          - FEET
+      responses:
+        '200':
+          description: Matching geo points.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeoPoint'
+        '400':
+          $ref: '#/components/responses/Error'
+    post:
+      operationId: saveGeoPoint
+      tags:
+      - Geo
+      summary: Add a geo point
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeoPoint'
+      responses:
+        '200':
+          description: The saved geo point.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoPoint'
+        '400':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    GeoPoint:
+      type: object
+      properties:
+        objectId:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        categories:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        distance:
+          type: number
+          format: double
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.

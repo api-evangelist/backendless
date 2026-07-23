@@ -1,0 +1,124 @@
+openapi: 3.0.1
+info:
+  title: Backendless REST Cache API
+  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  termsOfService: https://backendless.com/terms-of-service/
+  contact:
+    name: Backendless Support
+    url: https://support.backendless.com
+  version: '1.0'
+servers:
+- url: https://api.backendless.com/{app-id}/{rest-api-key}
+  description: Backendless application endpoint
+  variables:
+    app-id:
+      default: APP_ID
+      description: The application id assigned to your Backendless app.
+    rest-api-key:
+      default: REST_API_KEY
+      description: The REST API key generated for your Backendless app.
+security:
+- userToken: []
+tags:
+- name: Cache
+  description: Server-side key/value cache.
+paths:
+  /cache/{key}:
+    put:
+      operationId: cachePut
+      tags:
+      - Cache
+      summary: Put a value into cache
+      parameters:
+      - $ref: '#/components/parameters/CacheKey'
+      - name: timeout
+        in: query
+        description: Time-to-live in milliseconds.
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The value was cached.
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: cacheGet
+      tags:
+      - Cache
+      summary: Retrieve a cached value
+      parameters:
+      - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: The cached value.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '404':
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: cacheDelete
+      tags:
+      - Cache
+      summary: Delete a cached value
+      parameters:
+      - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: The cached value was removed.
+  /cache/{key}/check:
+    get:
+      operationId: cacheContains
+      tags:
+      - Cache
+      summary: Check if a key exists in cache
+      parameters:
+      - $ref: '#/components/parameters/CacheKey'
+      responses:
+        '200':
+          description: Whether the key exists.
+          content:
+            application/json:
+              schema:
+                type: boolean
+components:
+  parameters:
+    CacheKey:
+      name: key
+      in: path
+      required: true
+      description: Cache entry key.
+      schema:
+        type: string
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    userToken:
+      type: apiKey
+      in: header
+      name: user-token
+      description: Session token returned by POST /users/login. Required on operations that run in the context of an authenticated user. The application id and REST API key that scope every request are carried in the server URL path rather than as a security scheme.
