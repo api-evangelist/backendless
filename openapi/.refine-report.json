@@ -1,0 +1,28 @@
+{
+  "provider": "backendless",
+  "sources": [
+    "backendless-cache-api-openapi.yml",
+    "backendless-cloudcode-api-openapi.yml",
+    "backendless-counters-api-openapi.yml",
+    "backendless-data-api-openapi.yml",
+    "backendless-files-api-openapi.yml",
+    "backendless-geo-api-openapi.yml",
+    "backendless-messaging-api-openapi.yml",
+    "backendless-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "backendless-cache-api-openapi.yml",
+    "backendless-cloudcode-api-openapi.yml",
+    "backendless-counters-api-openapi.yml",
+    "backendless-data-api-openapi.yml",
+    "backendless-files-api-openapi.yml",
+    "backendless-geo-api-openapi.yml",
+    "backendless-messaging-api-openapi.yml",
+    "backendless-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
