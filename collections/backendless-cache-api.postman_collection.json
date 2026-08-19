@@ -1,0 +1,697 @@
+{
+  "item": [
+    {
+      "id": "385a5108-a7b0-4d60-8668-6c2b217ed4ca",
+      "name": "Cache",
+      "description": {
+        "content": "Server-side key/value cache.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75e5de8a-db3b-4663-ad2b-19f022e25b33",
+          "name": "Put a value into cache",
+          "request": {
+            "name": "Put a value into cache",
+            "description": {},
+            "url": {
+              "path": [
+                "cache",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<long>",
+                  "description": "Time-to-live in milliseconds."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Cache entry key."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 7886,\n  \"key_1\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6109ce19-186a-4433-827f-fc8318ef824d",
+              "name": "The value was cached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a97c248-7283-4f11-97d9-5a8d36e92ccb",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8512,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97ecc104-0374-4c19-9162-87ce676fadc5",
+          "name": "Retrieve a cached value",
+          "request": {
+            "name": "Retrieve a cached value",
+            "description": {},
+            "url": {
+              "path": [
+                "cache",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Cache entry key."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31987e91-d390-40b9-93de-a2a7215d73d7",
+              "name": "The cached value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1032f70d-66e3-40ac-8926-6ca533873aa5",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8512,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5879fd1-7fd3-47d6-b784-49ae281382f9",
+          "name": "Delete a cached value",
+          "request": {
+            "name": "Delete a cached value",
+            "description": {},
+            "url": {
+              "path": [
+                "cache",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Cache entry key."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d448b826-10b3-45f5-8606-33678259e4d9",
+              "name": "The cached value was removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb189cb5-1d7e-4454-9551-b9b9ce851109",
+          "name": "Check if a key exists in cache",
+          "request": {
+            "name": "Check if a key exists in cache",
+            "description": {},
+            "url": {
+              "path": [
+                "cache",
+                ":key",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Cache entry key."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c23e431-8f52-4706-8cca-253818fa1f61",
+              "name": "Whether the key exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cache",
+                    ":key",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Cache entry key."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "true",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The application id assigned to your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "APP_ID",
+      "key": "app-id"
+    },
+    {
+      "description": {
+        "content": "The REST API key generated for your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "REST_API_KEY",
+      "key": "rest-api-key"
+    },
+    {
+      "type": "string",
+      "value": "https://api.backendless.com/{{app-id}}/{{rest-api-key}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "user-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb860701-6b4b-4b70-84a9-696e813e55d0",
+    "name": "Backendless REST Cache API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.\n\nContact Support:\n Name: Backendless Support",
+      "type": "text/plain"
+    }
+  }
+}

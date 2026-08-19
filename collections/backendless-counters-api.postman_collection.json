@@ -1,0 +1,552 @@
+{
+  "item": [
+    {
+      "id": "0a2c430a-7932-43e1-a61e-3733c404bd5f",
+      "name": "Counters",
+      "description": {
+        "content": "Thread-safe atomic counters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e09845cd-46db-4bca-bfbd-1025c980c81f",
+          "name": "Increment by 1 and return current",
+          "request": {
+            "name": "Increment by 1 and return current",
+            "description": {
+              "content": "Atomically increments the counter by one and returns the new value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "counters",
+                ":counter-name",
+                "increment",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "counter-name",
+                  "description": "(Required) Name of the atomic counter."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e05acf5e-2900-4eee-bbf6-2a8c6b52aed2",
+              "name": "The current counter value after incrementing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counters",
+                    ":counter-name",
+                    "increment",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "counter-name",
+                      "description": "(Required) Name of the atomic counter."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "529",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4081f2d0-fc70-46d8-a3f3-7e37ea0804ed",
+          "name": "Increment by N and return current",
+          "request": {
+            "name": "Increment by N and return current",
+            "description": {},
+            "url": {
+              "path": [
+                "counters",
+                ":counter-name",
+                "incrementby",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<long>",
+                  "description": "(Required) Amount to add to the counter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "counter-name",
+                  "description": "(Required) Name of the atomic counter."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bedaaf81-9dde-4fd4-99f8-54551384509a",
+              "name": "The current counter value after incrementing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counters",
+                    ":counter-name",
+                    "incrementby",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "counter-name",
+                      "description": "(Required) Name of the atomic counter."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "529",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4737c617-c73e-4890-992e-b6d002cddf39",
+          "name": "Get the current counter value",
+          "request": {
+            "name": "Get the current counter value",
+            "description": {},
+            "url": {
+              "path": [
+                "counters",
+                ":counter-name",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "counter-name",
+                  "description": "(Required) Name of the atomic counter."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88364f10-3498-4eb1-9c23-2f730487e579",
+              "name": "The current counter value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counters",
+                    ":counter-name",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "counter-name",
+                      "description": "(Required) Name of the atomic counter."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "529",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6157be0d-edd7-4a40-88be-732dfc693d69",
+          "name": "Reset a counter to zero",
+          "request": {
+            "name": "Reset a counter to zero",
+            "description": {},
+            "url": {
+              "path": [
+                "counters",
+                ":counter-name",
+                "reset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "counter-name",
+                  "description": "(Required) Name of the atomic counter."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9dfae19-2fd4-4cf1-9a9d-116c5ca3177b",
+              "name": "The counter was reset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counters",
+                    ":counter-name",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "counter-name",
+                      "description": "(Required) Name of the atomic counter."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The application id assigned to your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "APP_ID",
+      "key": "app-id"
+    },
+    {
+      "description": {
+        "content": "The REST API key generated for your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "REST_API_KEY",
+      "key": "rest-api-key"
+    },
+    {
+      "type": "string",
+      "value": "https://api.backendless.com/{{app-id}}/{{rest-api-key}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "user-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "36d54d19-7f00-4fb6-92a8-9935c774a5c8",
+    "name": "Backendless REST Cache Counters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.\n\nContact Support:\n Name: Backendless Support",
+      "type": "text/plain"
+    }
+  }
+}

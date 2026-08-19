@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Files API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/files/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Directory path and filename, e.g. images/photo.png."
+              },
+              {
+                "name": "overwrite",
+                "value": "",
+                "type": "query",
+                "description": "Whether to overwrite an existing file at the path."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to the given path in the hosted file repository. Missing directories in the path are created automatically."
+        },
+        {
+          "info": {
+            "name": "Delete a file or directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/files/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a file or directory"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

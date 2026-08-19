@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              },
+              {
+                "name": "where",
+                "value": "",
+                "type": "query",
+                "description": "SQL-like search clause applied to the table."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of objects to return per page (max 100)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object to return."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to sort by."
+              },
+              {
+                "name": "property",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties (or aggregates) to return."
+              },
+              {
+                "name": "loadRelations",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related columns to eager-load."
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of columns to group results by."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of objects from a table with optional filtering, paging, sorting, relations, grouping, and property projection."
+        },
+        {
+          "info": {
+            "name": "Save a single object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Persists a new object into the named table. The request body must not include an objectId; Backendless assigns one and returns the saved object."
+        },
+        {
+          "info": {
+            "name": "Retrieve object by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name/:object-id",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              },
+              {
+                "name": "object-id",
+                "value": "",
+                "type": "path",
+                "description": "System-assigned objectId of a stored object."
+              }
+            ]
+          },
+          "docs": "Retrieve object by id"
+        },
+        {
+          "info": {
+            "name": "Update a single object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name/:object-id",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              },
+              {
+                "name": "object-id",
+                "value": "",
+                "type": "path",
+                "description": "System-assigned objectId of a stored object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties supplied in the body for the identified object."
+        },
+        {
+          "info": {
+            "name": "Delete a single object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name/:object-id",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              },
+              {
+                "name": "object-id",
+                "value": "",
+                "type": "path",
+                "description": "System-assigned objectId of a stored object."
+              }
+            ]
+          },
+          "docs": "Delete a single object"
+        },
+        {
+          "info": {
+            "name": "Count objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/data/:table-name/count",
+            "params": [
+              {
+                "name": "table-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database table (data store class)."
+              },
+              {
+                "name": "where",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the number of objects in a table matching an optional where clause."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

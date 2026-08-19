@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache CloudCode API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CloudCode",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Invoke a custom Cloud Code service method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/services/:service-name/:method-name",
+            "params": [
+              {
+                "name": "service-name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "method-name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calls a method on a developer-defined serverless API service deployed to Backendless Cloud Code. The request and response shapes are defined by the custom service implementation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

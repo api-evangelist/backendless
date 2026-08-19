@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new user"
+        },
+        {
+          "info": {
+            "name": "Log in a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user with an identity (e.g. email) and password. The response includes a user-token that must be sent in the user-token header on subsequent authenticated requests."
+        },
+        {
+          "info": {
+            "name": "Log out the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/logout"
+          },
+          "docs": "Log out the current user"
+        },
+        {
+          "info": {
+            "name": "Initiate password recovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/users/restorepassword/:identity",
+            "params": [
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path",
+                "description": "The user identity (e.g. email) to recover."
+              }
+            ]
+          },
+          "docs": "Initiate password recovery"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

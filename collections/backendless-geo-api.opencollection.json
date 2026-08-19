@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Geo API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search geo points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/geo/points",
+            "params": [
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Finds geo points by category and proximity. Supply latitude/longitude with a radius and units for a radius search."
+        },
+        {
+          "info": {
+            "name": "Add a geo point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/geo/points",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a geo point"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,784 @@
+{
+  "item": [
+    {
+      "id": "4184e8d6-a389-431e-b073-0781f72750d0",
+      "name": "Users",
+      "description": {
+        "content": "User registration, authentication, and session management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf791a7b-e9c1-46ca-9cde-19be53559028",
+          "name": "Register a new user",
+          "request": {
+            "name": "Register a new user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51e76a03-a9ac-4df8-a9c6-7c7ab4eebf98",
+              "name": "The created user object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objectId\": \"string\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"user-token\": \"string\",\n  \"userStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164a89ff-f696-49e1-9c99-bdb48a96d0dd",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3660,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "358f37ea-d1ab-4c28-879e-9fceb082aea8",
+          "name": "Log in a user",
+          "request": {
+            "name": "Log in a user",
+            "description": {
+              "content": "Authenticates a user with an identity (e.g. email) and password. The response includes a user-token that must be sent in the user-token header on subsequent authenticated requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "997e1f2a-88e6-4f7b-af7d-df2929b5ca38",
+              "name": "Authenticated user object including user-token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objectId\": \"string\",\n  \"email\": \"string\",\n  \"name\": \"string\",\n  \"user-token\": \"string\",\n  \"userStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e56e84c3-500f-40b0-bb73-da18240a5210",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3660,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91c8807f-645d-4a34-bc0f-98d401a71f5e",
+          "name": "Log out the current user",
+          "request": {
+            "name": "Log out the current user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac327a25-a1f4-4484-a79a-e4d237be6221",
+              "name": "The session was invalidated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b2aacb4-cd97-4aa3-bdbb-08b5d72bcddd",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3660,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef69d957-7044-4430-9ef4-f2ca2d533f67",
+          "name": "Initiate password recovery",
+          "request": {
+            "name": "Initiate password recovery",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "restorepassword",
+                ":identity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity",
+                  "description": "(Required) The user identity (e.g. email) to recover."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "807e0149-316a-4fe1-8130-6f3668826c68",
+              "name": "A recovery email was sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "restorepassword",
+                    ":identity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity",
+                      "description": "(Required) The user identity (e.g. email) to recover."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46ee9e87-84d8-4299-80e7-af4fa55fa743",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "restorepassword",
+                    ":identity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity",
+                      "description": "(Required) The user identity (e.g. email) to recover."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3660,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The application id assigned to your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "APP_ID",
+      "key": "app-id"
+    },
+    {
+      "description": {
+        "content": "The REST API key generated for your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "REST_API_KEY",
+      "key": "rest-api-key"
+    },
+    {
+      "type": "string",
+      "value": "https://api.backendless.com/{{app-id}}/{{rest-api-key}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "user-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "649ccd12-6b81-497d-a2c3-2db2c7b9953f",
+    "name": "Backendless REST Cache Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.\n\nContact Support:\n Name: Backendless Support",
+      "type": "text/plain"
+    }
+  }
+}

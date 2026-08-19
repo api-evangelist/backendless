@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Messaging API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messaging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/messaging/:channel-name",
+            "params": [
+              {
+                "name": "channel-name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a message to a named channel. The same channel endpoint is used to dispatch mobile push notifications by supplying push headers and a delivery policy (singlecast or broadcast) in the body."
+        },
+        {
+          "info": {
+            "name": "Poll for messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/messaging/:channel-name/:subscription-id",
+            "params": [
+              {
+                "name": "channel-name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subscription-id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves messages buffered for an established polling subscription."
+        },
+        {
+          "info": {
+            "name": "Send a basic email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/messaging/email",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a basic email"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

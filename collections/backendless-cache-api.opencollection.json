@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cache",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a cached value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Cache entry key."
+              }
+            ]
+          },
+          "docs": "Retrieve a cached value"
+        },
+        {
+          "info": {
+            "name": "Put a value into cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Cache entry key."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Time-to-live in milliseconds."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Put a value into cache"
+        },
+        {
+          "info": {
+            "name": "Delete a cached value",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Cache entry key."
+              }
+            ]
+          },
+          "docs": "Delete a cached value"
+        },
+        {
+          "info": {
+            "name": "Check if a key exists in cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/cache/:key/check",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Cache entry key."
+              }
+            ]
+          },
+          "docs": "Check if a key exists in cache"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,485 @@
+{
+  "item": [
+    {
+      "id": "cb9d99cb-4242-44f2-a796-4f961503e3c3",
+      "name": "Files",
+      "description": {
+        "content": "File and directory storage operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "496e7009-cb78-4f36-8e96-66174655a42c",
+          "name": "Upload a file",
+          "request": {
+            "name": "Upload a file",
+            "description": {
+              "content": "Uploads a file to the given path in the hosted file repository. Missing directories in the path are created automatically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "overwrite",
+                  "value": "<boolean>",
+                  "description": "Whether to overwrite an existing file at the path."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) Directory path and filename, e.g. images/photo.png."
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df32f00b-24db-4412-902d-2c1a7cb129e6",
+              "name": "Metadata for the uploaded file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "overwrite",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Directory path and filename, e.g. images/photo.png."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileURL\": \"https://Rqlxx.pdulwrblBfB3o,od\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2a1653a-379e-4f8c-8d1c-601100acfba0",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "overwrite",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Directory path and filename, e.g. images/photo.png."
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "025f1ad0-3131-4112-aee4-444adfd43cad",
+          "name": "Delete a file or directory",
+          "request": {
+            "name": "Delete a file or directory",
+            "description": {},
+            "url": {
+              "path": [
+                "files",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "062164f7-e804-4c7a-aa88-3e34d5da0195",
+              "name": "The file or directory was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03bc465e-498f-4b6f-a0ad-05456f06c2f9",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The application id assigned to your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "APP_ID",
+      "key": "app-id"
+    },
+    {
+      "description": {
+        "content": "The REST API key generated for your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "REST_API_KEY",
+      "key": "rest-api-key"
+    },
+    {
+      "type": "string",
+      "value": "https://api.backendless.com/{{app-id}}/{{rest-api-key}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "user-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8cecd50c-62c8-4f02-93e6-116a47ca2af8",
+    "name": "Backendless REST Cache Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.\n\nContact Support:\n Name: Backendless Support",
+      "type": "text/plain"
+    }
+  }
+}

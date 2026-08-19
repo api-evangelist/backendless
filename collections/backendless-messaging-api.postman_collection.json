@@ -1,0 +1,673 @@
+{
+  "item": [
+    {
+      "id": "fc1715cc-deee-4e37-bb4b-be91584080b7",
+      "name": "Messaging",
+      "description": {
+        "content": "Publish-subscribe messaging, push notifications, and email.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83c0bdec-bcea-4229-93c3-5bcc4f95149f",
+          "name": "Publish a message",
+          "request": {
+            "name": "Publish a message",
+            "description": {
+              "content": "Publishes a message to a named channel. The same channel endpoint is used to dispatch mobile push notifications by supplying push headers and a delivery policy (singlecast or broadcast) in the body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                ":channel-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel-name",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {},\n  \"headers\": {\n    \"key_0\": 3846\n  },\n  \"publishAt\": \"<long>\",\n  \"pushPolicy\": \"<string>\",\n  \"pushBroadcast\": \"<integer>\",\n  \"pushSinglecast\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c95dfcfb-c2b3-4be5-8134-d4a31073ca90",
+              "name": "Publish acknowledgement with a message id and status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":channel-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel-name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {},\n  \"headers\": {\n    \"key_0\": 4505,\n    \"key_1\": \"string\",\n    \"key_2\": 9686\n  },\n  \"publishAt\": \"<long>\",\n  \"pushPolicy\": \"<string>\",\n  \"pushBroadcast\": \"<integer>\",\n  \"pushSinglecast\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messageId\": \"string\",\n  \"status\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "449a1be0-0619-4078-9bc3-1394430d7152",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":channel-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel-name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {},\n  \"headers\": {\n    \"key_0\": 4505,\n    \"key_1\": \"string\",\n    \"key_2\": 9686\n  },\n  \"publishAt\": \"<long>\",\n  \"pushPolicy\": \"<string>\",\n  \"pushBroadcast\": \"<integer>\",\n  \"pushSinglecast\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3828,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7959e80-7f35-4836-85a9-f429b9fca2c4",
+          "name": "Poll for messages",
+          "request": {
+            "name": "Poll for messages",
+            "description": {
+              "content": "Retrieves messages buffered for an established polling subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                ":channel-name",
+                ":subscription-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel-name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscription-id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf3e67ff-0f00-4e8c-8d41-f7fc8d804605",
+              "name": "Buffered messages for the subscription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":channel-name",
+                    ":subscription-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel-name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription-id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 4859.171581662259,\n  \"key_1\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "720839b4-22de-45fa-bcbd-f1fd340f0ab9",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":channel-name",
+                    ":subscription-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel-name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription-id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3828,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecc51f9c-efd8-4ab6-934d-a4c253b502e0",
+          "name": "Send a basic email",
+          "request": {
+            "name": "Send a basic email",
+            "description": {},
+            "url": {
+              "path": [
+                "messaging",
+                "email"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The application id assigned to your Backendless app.",
+                  "type": "any",
+                  "value": "{{app-id}}",
+                  "key": "app-id"
+                },
+                {
+                  "description": "The REST API key generated for your Backendless app.",
+                  "type": "any",
+                  "value": "{{rest-api-key}}",
+                  "key": "rest-api-key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyparts\": {\n    \"textmessage\": \"<string>\",\n    \"htmlmessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "adf0d4be-0809-4340-aedd-ba6a96221798",
+              "name": "The email was queued for delivery.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyparts\": {\n    \"textmessage\": \"<string>\",\n    \"htmlmessage\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "039c1e99-01d0-4701-9fde-16a81870f654",
+              "name": "A Backendless error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The application id assigned to your Backendless app.",
+                      "type": "any",
+                      "value": "{{app-id}}",
+                      "key": "app-id"
+                    },
+                    {
+                      "description": "The REST API key generated for your Backendless app.",
+                      "type": "any",
+                      "value": "{{rest-api-key}}",
+                      "key": "rest-api-key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "user-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyparts\": {\n    \"textmessage\": \"<string>\",\n    \"htmlmessage\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3828,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The application id assigned to your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "APP_ID",
+      "key": "app-id"
+    },
+    {
+      "description": {
+        "content": "The REST API key generated for your Backendless app.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "REST_API_KEY",
+      "key": "rest-api-key"
+    },
+    {
+      "type": "string",
+      "value": "https://api.backendless.com/{{app-id}}/{{rest-api-key}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "user-token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "850d1ae6-f19a-48f1-bfc0-e7ec2e311e5a",
+    "name": "Backendless REST Cache Messaging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.\n\nContact Support:\n Name: Backendless Support",
+      "type": "text/plain"
+    }
+  }
+}

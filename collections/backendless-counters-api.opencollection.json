@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Backendless REST Cache Counters API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "user-token",
+      "value": "{{user-token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Counters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Increment by 1 and return current",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/:counter-name/increment/get",
+            "params": [
+              {
+                "name": "counter-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the atomic counter."
+              }
+            ]
+          },
+          "docs": "Atomically increments the counter by one and returns the new value."
+        },
+        {
+          "info": {
+            "name": "Increment by N and return current",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/:counter-name/incrementby/get",
+            "params": [
+              {
+                "name": "counter-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the atomic counter."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Amount to add to the counter."
+              }
+            ]
+          },
+          "docs": "Increment by N and return current"
+        },
+        {
+          "info": {
+            "name": "Get the current counter value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/:counter-name/get",
+            "params": [
+              {
+                "name": "counter-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the atomic counter."
+              }
+            ]
+          },
+          "docs": "Get the current counter value"
+        },
+        {
+          "info": {
+            "name": "Reset a counter to zero",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.backendless.com/{app-id}/{rest-api-key}/counters/:counter-name/reset",
+            "params": [
+              {
+                "name": "counter-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the atomic counter."
+              }
+            ]
+          },
+          "docs": "Reset a counter to zero"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
