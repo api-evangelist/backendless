@@ -8,6 +8,18 @@ description: Backendless is a visual app development and backend-as-a-service (B
   and atomic counters, plus serverless Cloud Code (custom API services and timers).
   Requests are authenticated with an application id and REST API key carried in the
   URL path and a user-token header for authenticated sessions.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
