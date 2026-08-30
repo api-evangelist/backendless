@@ -35,9 +35,10 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/backendless.png
 tags:
-- Backend-as-a-Service
+- BaaS
+- Backend as a Service
 - Visual Development
-- Low-Code
+- Low Code
 - Database
 - Real-Time
 tags_raw:
@@ -91,7 +92,7 @@ apis:
   humanURL: https://backendless.com/docs/rest/data_data_object_management.html
   baseURL: https://api.backendless.com/{app-id}/{rest-api-key}/data
   tags:
-  - Cloud Code
+  - CloudCode
   tags_raw:
   - CloudCode
   properties:
