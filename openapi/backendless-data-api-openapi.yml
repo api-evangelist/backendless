@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Backendless REST Cache Data API
-  description: REST API for the Backendless backend-as-a-service platform. Every request is addressed to a specific application using its application id and REST API key, both carried as path segments immediately after the host. Authenticated operations additionally require the user-token returned by the login endpoint, sent in the user-token request header. This specification covers the core documented services - Data, Users, Files, Messaging and Push, Geo, Cache, Atomic Counters, and Cloud Code custom service invocation.
+  title: Backendless REST Data API
+  description: REST API for the Backendless backend-as-a-service platform.
   termsOfService: https://backendless.com/terms-of-service/
   contact:
     name: Backendless Support
@@ -192,6 +192,28 @@ paths:
               schema:
                 type: integer
 components:
+  parameters:
+    ObjectId:
+      name: object-id
+      in: path
+      required: true
+      description: System-assigned objectId of a stored object.
+      schema:
+        type: string
+    TableName:
+      name: table-name
+      in: path
+      required: true
+      description: Name of the database table (data store class).
+      schema:
+        type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     DataObject:
       type: object
@@ -218,28 +240,6 @@ components:
           description: Backendless error code (e.g. 3003 for invalid credentials).
         message:
           type: string
-  responses:
-    Error:
-      description: A Backendless error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    TableName:
-      name: table-name
-      in: path
-      required: true
-      description: Name of the database table (data store class).
-      schema:
-        type: string
-    ObjectId:
-      name: object-id
-      in: path
-      required: true
-      description: System-assigned objectId of a stored object.
-      schema:
-        type: string
   securitySchemes:
     userToken:
       type: apiKey
