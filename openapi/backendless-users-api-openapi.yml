@@ -100,6 +100,25 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
+    LoginRequest:
+      type: object
+      required:
+      - login
+      - password
+      properties:
+        login:
+          type: string
+          description: User identity value, typically the email address.
+        password:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
     RegistrationRequest:
       type: object
       required:
@@ -112,17 +131,6 @@ components:
         name:
           type: string
       additionalProperties: true
-    LoginRequest:
-      type: object
-      required:
-      - login
-      - password
-      properties:
-        login:
-          type: string
-          description: User identity value, typically the email address.
-        password:
-          type: string
     User:
       type: object
       properties:
@@ -138,14 +146,6 @@ components:
         userStatus:
           type: string
       additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Backendless error code (e.g. 3003 for invalid credentials).
-        message:
-          type: string
   responses:
     Error:
       description: A Backendless error response.

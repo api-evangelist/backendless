@@ -192,6 +192,32 @@ paths:
               schema:
                 type: integer
 components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
+    DataObject:
+      type: object
+      description: A persisted object. Includes Backendless system properties.
+      properties:
+        objectId:
+          type: string
+        created:
+          type: integer
+          format: int64
+        updated:
+          type: integer
+          format: int64
+        ownerId:
+          type: string
+        ___class:
+          type: string
+      additionalProperties: true
   parameters:
     ObjectId:
       name: object-id
@@ -214,32 +240,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  schemas:
-    DataObject:
-      type: object
-      description: A persisted object. Includes Backendless system properties.
-      properties:
-        objectId:
-          type: string
-        created:
-          type: integer
-          format: int64
-        updated:
-          type: integer
-          format: int64
-        ownerId:
-          type: string
-        ___class:
-          type: string
-      additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Backendless error code (e.g. 3003 for invalid credentials).
-        message:
-          type: string
   securitySchemes:
     userToken:
       type: apiKey

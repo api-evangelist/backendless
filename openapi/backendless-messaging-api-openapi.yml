@@ -98,25 +98,14 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    EmailRequest:
+    ErrorResponse:
       type: object
-      required:
-      - subject
-      - to
       properties:
-        subject:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
           type: string
-        to:
-          type: array
-          items:
-            type: string
-        bodyparts:
-          type: object
-          properties:
-            textmessage:
-              type: string
-            htmlmessage:
-              type: string
     MessageStatus:
       type: object
       properties:
@@ -149,14 +138,25 @@ components:
           type: array
           items:
             type: string
-    ErrorResponse:
+    EmailRequest:
       type: object
+      required:
+      - subject
+      - to
       properties:
-        code:
-          type: integer
-          description: Backendless error code (e.g. 3003 for invalid credentials).
-        message:
+        subject:
           type: string
+        to:
+          type: array
+          items:
+            type: string
+        bodyparts:
+          type: object
+          properties:
+            textmessage:
+              type: string
+            htmlmessage:
+              type: string
   responses:
     Error:
       description: A Backendless error response.
