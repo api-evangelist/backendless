@@ -97,14 +97,38 @@ paths:
         '400':
           $ref: '#/components/responses/Error'
 components:
-  responses:
-    Error:
-      description: A Backendless error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    PublishMessageRequest:
+      type: object
+      properties:
+        message:
+          description: Arbitrary message payload (string or object).
+        headers:
+          type: object
+          additionalProperties: true
+        publishAt:
+          type: integer
+          format: int64
+        pushPolicy:
+          type: string
+          enum:
+          - ONLY
+          - ALSO
+          - NONE
+        pushBroadcast:
+          type: integer
+        pushSinglecast:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
     MessageStatus:
       type: object
       properties:
@@ -133,37 +157,13 @@ components:
               type: string
             htmlmessage:
               type: string
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Backendless error code (e.g. 3003 for invalid credentials).
-        message:
-          type: string
-    PublishMessageRequest:
-      type: object
-      properties:
-        message:
-          description: Arbitrary message payload (string or object).
-        headers:
-          type: object
-          additionalProperties: true
-        publishAt:
-          type: integer
-          format: int64
-        pushPolicy:
-          type: string
-          enum:
-          - ONLY
-          - ALSO
-          - NONE
-        pushBroadcast:
-          type: integer
-        pushSinglecast:
-          type: array
-          items:
-            type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     userToken:
       type: apiKey

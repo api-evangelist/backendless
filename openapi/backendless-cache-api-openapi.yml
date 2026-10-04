@@ -101,13 +101,6 @@ components:
           description: Backendless error code (e.g. 3003 for invalid credentials).
         message:
           type: string
-  responses:
-    Error:
-      description: A Backendless error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     CacheKey:
       name: key
@@ -116,6 +109,13 @@ components:
       description: Cache entry key.
       schema:
         type: string
+  responses:
+    Error:
+      description: A Backendless error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     userToken:
       type: apiKey

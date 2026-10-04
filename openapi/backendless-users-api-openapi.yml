@@ -100,18 +100,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    RegistrationRequest:
-      type: object
-      required:
-      - password
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-        name:
-          type: string
-      additionalProperties: true
     LoginRequest:
       type: object
       required:
@@ -144,6 +132,18 @@ components:
           type: string
           description: Session token for subsequent authenticated requests.
         userStatus:
+          type: string
+      additionalProperties: true
+    RegistrationRequest:
+      type: object
+      required:
+      - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
           type: string
       additionalProperties: true
   responses:
