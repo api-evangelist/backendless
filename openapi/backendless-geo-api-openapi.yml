@@ -93,6 +93,14 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Backendless error code (e.g. 3003 for invalid credentials).
+        message:
+          type: string
     GeoPoint:
       type: object
       properties:
@@ -114,14 +122,6 @@ components:
         distance:
           type: number
           format: double
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Backendless error code (e.g. 3003 for invalid credentials).
-        message:
-          type: string
   responses:
     Error:
       description: A Backendless error response.
