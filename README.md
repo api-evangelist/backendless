@@ -1,4 +1,4 @@
-# Backendless (backendless)
+# Backendless
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,187 +66,130 @@
 
 Backendless is a visual app development and backend-as-a-service (BaaS) platform that exposes a full set of REST APIs for data persistence, user management, file storage, publish-subscribe messaging, push notifications, geolocation, caching, and atomic counters, plus serverless Cloud Code (custom API services and timers). Requests are authenticated with an application id and REST API key carried in the URL path and a user-token header for authenticated sessions.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/backendless/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/backendless/refs/heads/main/apis.yml)
+**Areas:** Backend-as-a-Service · Visual Development · Low-Code · Database · Real-Time
 
-## Tags
+## Backendless on APIs.io
 
-- BaaS
-- Backend as a Service
-- Visual Development
-- Low Code
-- Database
-- Realtime
+Everything profiled for Backendless is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/backendless/](https://apis.io/providers/backendless/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (8)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Backendless Cache API](https://apis.io/apis/backendless/backendless-cache-api/) — Server-side key/value cache.
+- [Backendless CloudCode API](https://apis.io/apis/backendless/backendless-cloudcode-api/) — Invocation of custom serverless API services.
+- [Backendless Counters API](https://apis.io/apis/backendless/backendless-counters-api/) — Thread-safe atomic counters.
+- [Backendless Data API](https://apis.io/apis/backendless/backendless-data-api/) — CRUD and search over schema-backed database tables.
+- [Backendless Files API](https://apis.io/apis/backendless/backendless-files-api/) — File and directory storage operations.
+- [Backendless Geo API](https://apis.io/apis/backendless/backendless-geo-api/) — Geolocation point management and proximity search.
+- [Backendless Messaging API](https://apis.io/apis/backendless/backendless-messaging-api/) — Publish-subscribe messaging, push notifications, and email.
+- [Backendless Users API](https://apis.io/apis/backendless/backendless-users-api/) — User registration, authentication, and session management.
 
-## APIs
+### Published properties
 
-### Backendless Data Service API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-CRUD persistence over schema-backed tables - save, update, upsert, and delete single or bulk objects, plus rich search with where clauses, paging, sorting, relations, grouping, and aggregate functions.
+#### Agentic access (1)
 
-- **Human URL:** [https://backendless.com/docs/rest/data_data_object_management.html](https://backendless.com/docs/rest/data_data_object_management.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/data`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Backendless Agentic Access](https://apis.io/agentic-access/backendless/backendless-agentic-access/)
 
-- Data
-- Database
-- CRUD
-- Tables
+#### Collections (9)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://backendless.com/docs/rest/data_data_object_management.html)
-- [API Reference](https://backendless.com/docs/rest/)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Backendless REST API](https://apis.io/collections/backendless/open-backendless/)
+- [Backendless REST Cache API](https://apis.io/collections/backendless/open-backendless-cache-api/)
+- [Backendless REST Cache CloudCode API](https://apis.io/collections/backendless/open-backendless-cloudcode-api/)
+- [Backendless REST Cache Counters API](https://apis.io/collections/backendless/open-backendless-counters-api/)
+- [Backendless REST Cache Data API](https://apis.io/collections/backendless/open-backendless-data-api/)
+- [Backendless REST Cache Files API](https://apis.io/collections/backendless/open-backendless-files-api/)
+- [Backendless REST Cache Geo API](https://apis.io/collections/backendless/open-backendless-geo-api/)
+- [Backendless REST Cache Messaging API](https://apis.io/collections/backendless/open-backendless-messaging-api/)
+- [Backendless REST Cache Users API](https://apis.io/collections/backendless/open-backendless-users-api/)
 
-### Backendless User Service API
+#### Security (2)
 
-User registration, login, logout, password recovery, email confirmation, current-user lookup, and role assignment. Login returns a user-token used as a header on subsequent authenticated requests.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://backendless.com/docs/rest/users_login.html](https://backendless.com/docs/rest/users_login.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/users`
+- [Backendless Authentication](https://apis.io/security/backendless/backendless-authentication/)
+- [Backendless Domain Security](https://apis.io/security/backendless/backendless-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Users
-- Authentication
-- Roles
-- Sessions
+Published plans, tiers and prices.
 
-#### Properties
+- [Backendless Plans Pricing](https://apis.io/plans/backendless/backendless-plans-pricing/)
 
-- [Documentation](https://backendless.com/docs/rest/users_user_registration.html)
-- [API Reference](https://backendless.com/docs/rest/)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Backendless File Service API
+Published request limits.
 
-Upload, download, copy, move, rename, and delete files and directories in the hosted file repository, with directory listing and permission controls.
+- [Backendless Rate Limits](https://apis.io/rate-limits/backendless/backendless-rate-limits/)
 
-- **Human URL:** [https://backendless.com/docs/rest/files_file_upload.html](https://backendless.com/docs/rest/files_file_upload.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/files`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Files
-- Storage
-- Upload
-- Hosting
+- [Backendless Finops](https://apis.io/finops/backendless/backendless-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://backendless.com/docs/rest/files_file_upload.html)
-- [API Reference](https://backendless.com/docs/rest/)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Backendless Messaging and Push API
-
-Publish-subscribe message exchange over named channels, polling-based message retrieval, mobile push notifications (singlecast/broadcast), device registration, and templated email delivery.
-
-- **Human URL:** [https://backendless.com/docs/rest/pubsub_overview.html](https://backendless.com/docs/rest/pubsub_overview.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/messaging`
-
-#### Tags
-
-- Messaging
-- Pub Sub
-- Push Notifications
-- Email
-
-#### Properties
-
-- [Documentation](https://backendless.com/docs/rest/pubsub_general_publish_api.html)
-- [API Reference](https://backendless.com/docs/rest/push_push_with_api.html)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Backendless Geo Service API
-
-Geo point management organized into categories with metadata, plus radius and rectangle proximity search and relative-distance queries against stored geo points.
-
-- **Human URL:** [https://backendless.com/docs/rest/geo_geocategories.html](https://backendless.com/docs/rest/geo_geocategories.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/geo`
-
-#### Tags
-
-- Geo
-- Geolocation
-- Spatial
-
-#### Properties
-
-- [Documentation](https://backendless.com/docs/rest/geo_geocategories.html)
-- [API Reference](https://backendless.com/docs/rest/)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Backendless Cache and Atomic Counters API
-
-Server-side key/value cache with put, get, contains, expire, and delete operations, and thread-safe atomic counters supporting increment, decrement, add-and-get, get, compare-and-set, and reset.
-
-- **Human URL:** [https://backendless.com/docs/rest/cache_overview.html](https://backendless.com/docs/rest/cache_overview.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}`
-
-#### Tags
-
-- Cache
-- Counters
-- Atomic
-
-#### Properties
-
-- [Documentation](https://backendless.com/docs/rest/cache_overview.html)
-- [API Reference](https://backendless.com/docs/rest/counters_overview.html)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Backendless Cloud Code API
-
-Invoke developer-defined serverless API services and methods deployed as Cloud Code, alongside event handlers and scheduled timers that run custom business logic in the Backendless runtime.
-
-- **Human URL:** [https://backendless.com/docs/rest/doc.html](https://backendless.com/docs/rest/doc.html)
-- **Base URL:** `https://api.backendless.com/{app-id}/{rest-api-key}/services`
-
-#### Tags
-
-- Cloud Code
-- Serverless
-- Custom API
-- Timers
-
-#### Properties
-
-- [Documentation](https://backendless.com/docs/rest/doc.html)
-- [API Reference](https://backendless.com/docs/rest/)
-- [OpenAPI](openapi/backendless-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/backendless.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/backendless.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/Backendless)
-- [LinkedIn](https://www.linkedin.com/company/backendless)
 - [Website](https://backendless.com)
 - [Documentation](https://backendless.com/docs/rest/)
-- [Plans](plans/backendless-plans-pricing.yml)
-- [Rate Limits](rate-limits/backendless-rate-limits.yml)
-- [Fin Ops](finops/backendless-finops.yml)
+- [Blog](https://backendless.com/feed/)
+- [GitHub](https://github.com/Backendless)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 22.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/backendless/](https://apis.io/providers/backendless/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Backendless: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/backendless/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
